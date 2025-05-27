@@ -1,0 +1,27 @@
+{
+  "name": "remap_back",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/nf626/ReMap_Back#readme",
+  "bugs": {
+    "url": "https://github.com/nf626/ReMap_Back/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nf626/ReMap_Back.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "node --watch --env-file=.env server"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
