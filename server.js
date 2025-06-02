@@ -1,12 +1,9 @@
 // Entry point
 import express from 'express';
-import path from 'path';
-import logger from './middleware/logger.js';
-import errorHandler from './middleware/error.js';
-import notFound from './middleware/notFound.js';
+import auths from './sign_up_in.js';
+import profiles from './profiles.js';
 
-const port = process.env.PORT || 8000;
-import posts from './routes/posts.js';
+const port = process.env.PORT || 3000;
 
 const app = express();
 
@@ -14,18 +11,11 @@ const app = express();
 app.use(express.json()); // take care of json data
 app.use(express.urlencoded({extended: false})); // xwww formurl
 
-// logger middleware
-app.use(logger);
+// Sign up/in
+app.use('/api/auth', auths);
 
-// static pages - middleware
-//app.use(express.static(path.join(__dirname, 'public'))); // render html pages
-
-// Routes middleware
-app.use('/api/posts', posts)
-
-// Error handler middleware
-app.use(notFound);
-app.use(errorHandler);
+// Profiles
+app.use('/api/profile', profiles);
 
 // listen port
 app.listen(port, () => {
