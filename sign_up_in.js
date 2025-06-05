@@ -1,43 +1,30 @@
-import { Router } from 'express';
-import supabase from './config/supabase.js';
-
+import { Router } from "express";
+import { deleteUser, getUser, listUsers, logOut, signIn, signUp, updateEmail, updatePassword } from "./controllers/authController.js";
 
 const router = Router();
 
-router.post('/signUp', async (req, res) => {
-    try {
-        const { data, error } = await supabase.auth.signUp({
-            email: req.body.email,
-            password: req.body.password
-        });
+// List all users
+router.get("/user", listUsers);
 
-        if (error) {
-            return res.status(400).json({msg: error.message});
-        } else {
-            return res.status(201).json(data);
-        }
-    } catch (err) {
-        return res.status(500).json({ msg: 'Server error', error: err.message });
-    }
-})
+// Retrieve a user
+router.get("/user/:id", getUser);
 
-router.post('/signIn', async (req, res) => {
-    try {
-        const { email, password } = req.body;
-        
-        const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-        });
+// Sign up
+router.post("/signUp", signUp);
 
-        if (error) {
-                return res.status(400).json({msg: error.message});
-        } else {
-            return res.status(201).json(data);
-        }
-    } catch (err) {
-        return res.status(500).json({ msg: 'Server error', error: err.message });
-    }
-})
+// Sign in
+router.post("/signIn", signIn);
+
+// Log out
+router.post("/signOut", logOut);
+
+// Update email
+router.put("/email/:id", updateEmail);
+
+// Update password
+router.put("/password/:id", updatePassword);
+
+// Delete account
+router.delete("/user:id", deleteUser);
 
 export default router;
