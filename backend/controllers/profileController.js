@@ -46,7 +46,7 @@ export const getProfile = async (req, res) => {
 // @route PUT /api/profiles/:id
 export const updateProfile = async (req, res) => {
     const id = req.params.id;
-    const { username, full_name, avatar_url } = req.body;
+    const { username, full_name } = req.body;
 
     try {
         const { data, error } = await supabase
@@ -54,7 +54,6 @@ export const updateProfile = async (req, res) => {
         .update({
             username,
             full_name,
-            avatar_url
         })
         .eq("id", id)
         .select();
